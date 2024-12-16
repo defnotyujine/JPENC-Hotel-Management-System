@@ -1,0 +1,64 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
+using MySql.Data.MySqlClient;
+
+namespace OFFICIAL_HOTEL_CUSTOMER_INFORMATION
+{
+    
+    public partial class Data : Form
+    {
+  
+        public Data()
+        {
+            InitializeComponent();
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string connection = "server=localhost;user id=root;password=;database=customerrecord";
+            string query = "SELECT * FROM tbl_customer";
+            MySqlConnection conn = new MySqlConnection(connection);
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            MySqlDataAdapter da = new MySqlDataAdapter();
+            da.SelectCommand = cmd;
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            dataGridView1.DataSource = dt;
+        }
+
+        private void UPDATE_Click(object sender, EventArgs e)
+        {
+            UpdateInformation form = new UpdateInformation();
+            form.ShowDialog();
+        }
+
+        private void DELETE_Click(object sender, EventArgs e)
+        {
+            DeleteInformation form = new DeleteInformation();
+            form.ShowDialog();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("FIRSTNAME='{0}'", txtSearch.Text);
+        }
+
+        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+    }
+}

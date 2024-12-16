@@ -1,0 +1,64 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using MySql.Data.MySqlClient;
+
+namespace OFFICIAL_HOTEL_CUSTOMER_INFORMATION
+{
+    public partial class DeleteInformation : Form
+    {
+        public DeleteInformation()
+        {
+            InitializeComponent();
+        }
+
+        private void DeleteInformation_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            string connection = "server=localhost;user id=root;password=;database=customerrecord";
+            string query = "DELETE FROM tbl_customer WHERE ROOMNUMBER='" + this.ROOMNUMBER.Text + "'";
+            MySqlConnection conn = new MySqlConnection(connection);
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            MySqlDataReader dr;
+            conn.Open();
+            dr = cmd.ExecuteReader();
+            MessageBox.Show("Data has been succesfully deleted!!");
+            conn.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+    }
+}
